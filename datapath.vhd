@@ -13,18 +13,17 @@ entity datapath is
         Zero : out std_logic;
         PC: bugger std_logic_vector(31 downto 0);
         Instr : in std_logic_vector(31 downto 0);
-        ALUResult, WriteData : buffer (31 downto 0);
-        ReadData : in std_logic_vector(31 downto 0);
-    );
+        ALUResult, WriteData : buffer std_logic_vector(31 downto 0);
+        ReadData : in std_logic_vector(31 downto 0));
 end entity datapath;
 
 architecture rtl of datapath is
     
-    component flopr generic (width: integer);
+    component flopr generic (WIDTH: integer);
         port (
             clk, reset : in std_logic;
-            d: in (WIDTH-1 downto 0);
-            q: out (WIDTH-1 downto 0));
+            d: in std_logic_vector(WIDTH-1 downto 0);
+            q: out std_logic_vector(WIDTH-1 downto 0));
     end component;
         
     component adder

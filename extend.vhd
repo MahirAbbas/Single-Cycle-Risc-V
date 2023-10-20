@@ -9,7 +9,6 @@ entity extend is
         immext: out STD_LOGIC_VECTOR(31 downto 0));
 end;
 
-end entity;
 
 architecture rtl of extend is
 begin

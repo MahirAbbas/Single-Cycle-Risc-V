@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity alu is
     port (
-        a,b : in std_logic_vector(31 downto 0)
-        ALUControl : in std_logic_vector(2 downto 0)
-        ALUResult : buffer std_logic_vector(31 downto 0)
+        a,b : in std_logic_vector(31 downto 0);
+        ALUControl : in std_logic_vector(2 downto 0);
+        ALUResult : buffer std_logic_vector(31 downto 0);
         Zero : out std_logic);
 end entity alu;
 
@@ -17,21 +17,25 @@ architecture rtl of alu is
     
 begin
     process (a,b,ALUControl)
+    begin
     case (ALUControl) is
+    
         when "000" =>
-            ALU_out <= signed(a) + signed(b);
+            ALU_out <= std_logic_vector(signed(a) + signed(b));
         when "001" =>
-            ALU_out <= signed(a) + signed(b);
+            ALU_out <= std_logic_vector(signed(a) - signed(b));
         when "010" =>
-            ALU_out <= signed(a) AND signed(b);
+            ALU_out <= std_logic_vector(signed(a) and signed(b));
+
         when "011" =>
-            ALU_out <= signed(a) OR signed(b);
+            ALU_out <= std_logic_vector(signed(a) or signed(b));
         when others =>
         ALU_out <= "X";
     end case;
+    
 end process;
     ALUResult <= ALU_out;
-    tmp <= ('0' & a) + ('0' & b);
+    tmp <= std_logic_vector(('0' & unsigned(a)) + ('0' & unsigned(b)));
     Zero <= tmp(32);
 
 end architecture;
