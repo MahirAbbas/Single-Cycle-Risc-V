@@ -11,7 +11,7 @@ entity regfile is
         rd1, rd2 :   out std_logic_vector(31 downto 0));
     end entity regfile;
     
-architecture behave of regfile is 
+architecture behave of register_file is 
     type ramtype is array (31 downto 0) of std_logic_vector (31 downto 0);
     
     signal mem: ramtype;

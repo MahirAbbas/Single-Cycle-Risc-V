@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use IEEE.STD_LOGIC_ARITH.all;
 
-entity data_path is
+entity datapath is
     port (
         clk, reset   : in std_logic;
         ResultSrc : in std_logic_vector(1 downto 0);
@@ -16,11 +16,11 @@ entity data_path is
         ALUResult, WriteData : buffer (31 downto 0);
         ReadData : in std_logic_vector(31 downto 0);
     );
-end entity data_path;
+end entity datapath;
 
-architecture rtl of data_path is
+architecture rtl of datapath is
     
-    component flopr 
+    component flopr generic (width: integer);
         port (
             clk, reset : in std_logic;
             d: in (WIDTH-1 downto 0);
@@ -47,7 +47,7 @@ architecture rtl of data_path is
             y:out STD_LOGIC_VECTOR(width-1 downto 0));
     end component;
     
-    component register_file
+    component regfile
         port(
             clk : in std_logic;
             we3 : in std_logic;
